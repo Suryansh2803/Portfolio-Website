@@ -128,23 +128,27 @@ export default function Projects() {
     // grid cards
     gsap.from('.pj-grid-card', {
       y: 50,
-      opacity: 0,
+      autoAlpha: 0,
       stagger: 0.1,
       duration: 0.8,
       ease: 'power3.out',
-      scrollTrigger: { trigger: '.pj-grid', start: 'top 85%' },
+      scrollTrigger: {
+        trigger: '.pj-grid',
+        start: 'top 95%',
+        once: true,
+      },
     })
 
     // 3D glass cards — smooth scroll-scrubbed tilt (NO full 360 to avoid backface mirror)
     gsap.utils.toArray('.glass-card').forEach((card, i) => {
       // Enter: card rises + tilts in from one side
       gsap.fromTo(card,
-        { opacity: 0, y: 80, rotateY: i % 2 === 0 ? -25 : 25, scale: 0.92 },
+        { autoAlpha: 0, y: 80, rotateY: i % 2 === 0 ? -25 : 25, scale: 0.92 },
         {
-          opacity: 1, y: 0, rotateY: 0, scale: 1,
+          autoAlpha: 1, y: 0, rotateY: 0, scale: 1,
           duration: 1.1,
           ease: 'power3.out',
-          scrollTrigger: { trigger: card, start: 'top 88%' },
+          scrollTrigger: { trigger: card, start: 'top 95%', once: true },
         }
       )
       // Subtle parallax tilt while scrolling past
@@ -334,7 +338,7 @@ export default function Projects() {
       {/* ══ §4 MINI GRID (detail cards) ═════════════════════════ */}
       <section className="pj-grid w-full px-7 md:px-14 py-20 border-b border-white/5">
         <p className="font-[font2] text-xs tracking-widest text-[#D3FD50] uppercase mb-10">PROJECT DETAILS</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" style={{ visibility: 'visible' }}>
           {projects.map((p) => (
             <a
               key={p.num}
@@ -342,7 +346,7 @@ export default function Projects() {
               target="_blank"
               rel="noreferrer"
               style={{ ['--pj-acc']: p.accentColor }}
-              className="pj-grid-card group relative flex flex-col justify-between rounded-2xl border border-white/5 hover:border-white/15 bg-[#0e0e0e] hover:bg-[#141414] p-6 min-h-[220px] overflow-hidden transition-all duration-400 cursor-pointer"
+              className="pj-grid-card group relative flex flex-col justify-between rounded-2xl border border-white/5 hover:border-white/15 bg-[#0e0e0e] hover:bg-[#141414] p-6 min-h-[220px] overflow-hidden transition-all duration-400 cursor-pointer" style={{ visibility: 'visible' }}
             >
               {/* accent line top */}
               <div
