@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import homeVideo from '../assets/HomeVIdeo.mp4'
 import aboutProfile from '../assets/about-profile.jpg'
+import heroPhoto from '../assets/home-hero.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -55,6 +56,26 @@ export default function Home() {
         end: '60% top',
         scrub: 1,
       },
+    })
+
+    // hero portrait parallax
+    gsap.to('.h-hero-img', {
+      y: -70,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.h-hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.5,
+      },
+    })
+    // hero portrait fade in
+    gsap.from('.h-hero-img', {
+      opacity: 0,
+      scale: 1.04,
+      duration: 1.4,
+      ease: 'power3.out',
+      delay: 0.6,
     })
 
     // statement lines reveal
@@ -154,6 +175,19 @@ export default function Home() {
           <video className="w-full h-full object-cover opacity-40" src={homeVideo} autoPlay loop muted playsInline />
           <div className="h-video-overlay absolute inset-0 bg-[#080808] opacity-0" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/80 via-transparent to-[#080808]" />
+        </div>
+
+        {/* hero portrait — right side */}
+        <div className="absolute right-0 top-0 h-full w-[45%] hidden md:block overflow-hidden pointer-events-none">
+          <img
+            src={heroPhoto}
+            alt="Suryansh Yadav"
+            className="h-hero-img w-full h-full object-cover object-right grayscale opacity-50"
+          />
+          {/* left gradient fade into dark bg */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/40 to-transparent" />
+          {/* bottom vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent" />
         </div>
 
         {/* hero copy */}
