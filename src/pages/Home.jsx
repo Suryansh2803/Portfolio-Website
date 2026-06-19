@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import heroBg from '../assets/hero-bg.png'
+import homeVideo from '../assets/HomeVIdeo.mp4'
 import aboutProfile from '../assets/about-profile.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -151,7 +151,7 @@ export default function Home() {
       <section className="h-hero relative h-screen w-full overflow-hidden flex flex-col justify-between">
         {/* video bg */}
         <div className="absolute inset-0">
-          <img src={heroBg} alt="Hero Background" className="w-full h-full object-cover opacity-40" />
+          <video className="w-full h-full object-cover opacity-40" src={homeVideo} autoPlay loop muted playsInline />
           <div className="h-video-overlay absolute inset-0 bg-[#080808] opacity-0" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/80 via-transparent to-[#080808]" />
         </div>
