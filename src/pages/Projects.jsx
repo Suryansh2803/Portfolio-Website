@@ -195,7 +195,7 @@ export default function Projects() {
       <section className="w-full min-h-[65vh] flex flex-col justify-between pt-36 pb-16 px-7 md:px-14 border-b border-white/5 relative overflow-hidden">
         {/* faint bg image */}
         <div className="absolute right-0 top-0 h-full w-[35%] opacity-10 pointer-events-none hidden md:block">
-          <img src={img5} alt="" className="w-full h-full object-cover object-top grayscale" />
+          <img src={img5} alt="" className="w-full h-full object-cover object-center grayscale" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#080808] to-transparent" />
         </div>
 
@@ -272,7 +272,7 @@ export default function Projects() {
                 <img
                   src={img5}
                   alt={featured.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#111]/60 via-transparent to-transparent md:block hidden" />
                 <div className="absolute bottom-4 right-4">

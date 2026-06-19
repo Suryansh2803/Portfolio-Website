@@ -288,7 +288,7 @@ export default function Home() {
             <img
               src={aboutProfile}
               alt="Suryansh Yadav"
-              className="h-portrait w-full h-full object-cover object-top scale-110 grayscale hover:grayscale-0 transition-all duration-700"
+              className="h-portrait w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/60 via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 font-[font2] text-xs text-[#e8e3da]/50 uppercase tracking-widest">

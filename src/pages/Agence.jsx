@@ -112,7 +112,7 @@ export default function Agence() {
         style={{ left: 0, top: 0, transform: 'translate(-50%,-50%)', pointerEvents: 'none' }}
         className={`fixed z-50 w-[240px] h-[160px] rounded-2xl overflow-hidden shadow-2xl transition-opacity duration-300 hidden md:block ${hoveredExp !== null ? 'opacity-100' : 'opacity-0'}`}
       >
-        <img src={aboutProfile} alt="" className="w-full h-full object-cover grayscale" />
+        <img src={aboutProfile} alt="" className="w-full h-full object-cover object-center grayscale" />
       </div>
 
       {/* ══ §1 HERO ══ */}
@@ -120,7 +120,7 @@ export default function Agence() {
         {/* portrait — sits right, absolute */}
         <div className="absolute right-0 top-0 h-full w-[42%] hidden md:block overflow-hidden">
           <div ref={imgRef} className="h-[115%] w-full -mt-[7%]">
-            <img src={aboutProfile} alt="Suryansh" className="w-full h-full object-cover object-top grayscale opacity-60" />
+            <img src={aboutProfile} alt="Suryansh" className="w-full h-full object-cover object-center grayscale opacity-60" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/30 to-transparent" />
         </div>
