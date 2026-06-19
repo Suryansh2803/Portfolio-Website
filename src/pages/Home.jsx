@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import homeVideo from '../assets/HomeVIdeo.mp4'
-import img5 from '../assets/img5.jpeg'
+import aboutProfile from '../assets/about-profile.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -286,9 +286,9 @@ export default function Home() {
           {/* portrait */}
           <div className="relative overflow-hidden rounded-2xl h-[70vh] bg-[#111] order-2 md:order-1">
             <img
-              src={img5}
+              src={aboutProfile}
               alt="Suryansh Yadav"
-              className="h-portrait w-full h-full object-cover scale-110 grayscale hover:grayscale-0 transition-all duration-700"
+              className="h-portrait w-full h-full object-cover object-top scale-110 grayscale hover:grayscale-0 transition-all duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/60 via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 font-[font2] text-xs text-[#e8e3da]/50 uppercase tracking-widest">

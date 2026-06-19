@@ -128,7 +128,7 @@ export default function Projects() {
     // grid cards
     gsap.from('.pj-grid-card', {
       y: 50,
-      autoAlpha: 0,
+      opacity: 0,
       stagger: 0.1,
       duration: 0.8,
       ease: 'power3.out',
@@ -338,7 +338,7 @@ export default function Projects() {
       {/* ══ §4 MINI GRID (detail cards) ═════════════════════════ */}
       <section className="pj-grid w-full px-7 md:px-14 py-20 border-b border-white/5">
         <p className="font-[font2] text-xs tracking-widest text-[#D3FD50] uppercase mb-10">PROJECT DETAILS</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" style={{ visibility: 'visible' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {projects.map((p) => (
             <a
               key={p.num}
@@ -346,7 +346,7 @@ export default function Projects() {
               target="_blank"
               rel="noreferrer"
               style={{ ['--pj-acc']: p.accentColor }}
-              className="pj-grid-card group relative flex flex-col justify-between rounded-2xl border border-white/5 hover:border-white/15 bg-[#0e0e0e] hover:bg-[#141414] p-6 min-h-[220px] overflow-hidden transition-all duration-400 cursor-pointer" style={{ visibility: 'visible' }}
+              className="pj-grid-card group relative flex flex-col justify-between rounded-2xl border border-white/5 hover:border-white/15 bg-[#0e0e0e] hover:bg-[#141414] p-6 min-h-[220px] overflow-hidden transition-all duration-400 cursor-pointer"
             >
               {/* accent line top */}
               <div
