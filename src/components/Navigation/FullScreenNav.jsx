@@ -7,7 +7,8 @@ const navLinks = [
   { label: 'Home',     path: '/' },
   { label: 'Work',     path: '/projects' },
   { label: 'About',    path: '/agence' },
-  { label: 'Contact',  path: 'mailto:suryanshyadav117@gmail.com' },
+  { label: 'Skills & Coding', path: '/skills' },
+  { label: 'Contact',  path: '/contact' },
 ]
 
 const FullScreenNav = ({ menuOpen, setMenuOpen }) => {

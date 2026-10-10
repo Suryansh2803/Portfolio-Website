@@ -1,262 +1,174 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import aboutProfile from '../assets/about-profile.jpg'
+import aboutHero from '../assets/about-coding-hero.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const skills = ['React', 'Next.js', 'Node.js', 'MongoDB', 'Firebase', 'Tailwind CSS', 'GSAP', 'Lenis', 'Vite', 'TypeScript', 'Figma', 'OpenAI API']
-
-const experience = [
-  { year: '2026', role: 'Full Stack Developer',   company: 'Freelance / Remote', desc: 'Building premium interactive web apps and AI SaaS platforms for clients worldwide.' },
-  { year: '2025', role: 'Frontend Engineer',        company: 'Abhyudaya Club · GLBITM', desc: 'Led front-end development for the official club platform, delivering member management and event features.' },
-  { year: '2024', role: 'Creative Developer',       company: 'Self-Initiated Projects', desc: 'Shipped Creator Copilot AI and this animated portfolio, exploring GSAP, Three.js, and AI integrations.' },
+const journey = [
+  { year: '2028', title: 'B.Tech CSE (AI/ML) · Expected', detail: 'GL Bajaj Institute of Technology and Management' },
+  { year: '2023 – Present', title: 'B.Tech · Third Year', detail: 'Currently focused on AI/ML, web development, and problem solving.' },
+  { year: '2023', title: 'Class XII', detail: '92.4%' },
+  { year: '2021', title: 'Class X', detail: '87.6%' },
 ]
 
-export default function Agence() {
-  const pageRef   = useRef(null)
-  const imgRef    = useRef(null)
-  const cursorRef = useRef(null)
-  const [hoveredExp, setHoveredExp] = useState(null)
+const motivations = [
+  { icon: '◎', title: 'Problem Solving', detail: 'I enjoy breaking down complex problems and finding simple, efficient solutions.' },
+  { icon: '⌘', title: 'Web Development', detail: 'I love building interactive and user-friendly applications that solve real problems.' },
+  { icon: '◉', title: 'AI / ML', detail: 'Curious about machine learning and the useful things it can make possible.' },
+  { icon: '↗', title: 'Continuous Growth', detail: 'Always learning new technologies and looking for ways to improve my skills.' },
+]
 
-  const onMouseMove = (e) => {
-    if (!cursorRef.current) return
-    gsap.to(cursorRef.current, { x: e.clientX, y: e.clientY, duration: 0.3, ease: 'power3.out' })
-  }
+const techGroups = [
+  { title: 'Languages', items: [['C++', 'C++', '#55a9ff'], ['C', 'C', '#55a9ff'], ['Java', '♨', '#ff8c36'], ['JavaScript', 'JS', '#f5d328']] },
+  { title: 'Frontend', items: [['HTML', '5', '#ff6737'], ['CSS', '3', '#3889ff'], ['React', '⚛', '#55d8f4'], ['Tailwind CSS', '≈', '#49d9df']] },
+  { title: 'Backend', items: [['Node.js', '⬡', '#a7e63b'], ['MongoDB', '◖', '#54d897']] },
+  { title: 'Tools & Platforms', items: [['Git', '◆', '#ff633e'], ['GitHub', '◉', '#f4f4f4'], ['VS Code', '⌁', '#48a9ff'], ['Linux', '♟', '#eee']] },
+]
+
+function Stat({ icon, value, label, detail }) {
+  return (
+    <div className="flex items-center gap-4 border-b border-white/10 py-5 last:border-0 sm:border-b-0 sm:border-r sm:px-5 sm:py-2 sm:last:border-0">
+      <span aria-hidden="true" className="min-w-10 text-center text-3xl leading-none text-[#D3FD50]">{icon}</span>
+      <div>
+        <p className="text-2xl font-medium leading-tight text-[#f1eee8]">{value}</p>
+        <p className="mt-1 text-xs text-white/55">{label}</p>
+        {detail && <p className="mt-1 max-w-52 text-[11px] leading-relaxed text-white/40">{detail}</p>}
+      </div>
+    </div>
+  )
+}
+
+export default function Agence() {
+  const pageRef = useRef(null)
+  const imageRef = useRef(null)
 
   useGSAP(() => {
-    // headline clip up
-    gsap.from('.ab-word', {
-      yPercent: 110,
-      duration: 1,
-      stagger: 0.07,
-      ease: 'power4.out',
-      delay: 0.3,
-    })
-    gsap.from('.ab-meta', {
-      opacity: 0,
-      y: 14,
-      stagger: 0.09,
-      duration: 0.8,
-      ease: 'power3.out',
-      delay: 0.9,
-    })
-
-    // portrait slow drift
-    gsap.to(imgRef.current, {
-      y: -60,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.ab-intro',
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 1.5,
-      },
-    })
-
-    // skills chip stagger
-    gsap.from('.ab-skill', {
-      opacity: 0,
-      scale: 0.7,
-      stagger: 0.04,
-      duration: 0.5,
-      ease: 'back.out(1.4)',
-      scrollTrigger: { trigger: '.ab-skills-wrap', start: 'top 85%' },
-    })
-
-    // experience rows
-    gsap.from('.ab-exp-row', {
-      x: -40,
-      opacity: 0,
-      stagger: 0.1,
-      duration: 0.75,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: '.ab-exp', start: 'top 82%' },
-    })
-
-    // manifesto lines
-    gsap.from('.ab-mani', {
-      yPercent: 110,
-      stagger: 0.09,
-      duration: 0.9,
-      ease: 'power4.out',
-      scrollTrigger: { trigger: '.ab-manifesto', start: 'top 80%' },
-    })
-
-    // marquee
-    gsap.to('.ab-mq', {
-      xPercent: -50,
-      ease: 'none',
-      duration: 18,
-      repeat: -1,
-    })
-
-    // cta
-    gsap.from('.ab-cta-el', {
-      y: 40,
+    gsap.from('.ab-reveal', {
+      y: 28,
       opacity: 0,
       stagger: 0.1,
       duration: 0.8,
       ease: 'power3.out',
-      scrollTrigger: { trigger: '.ab-cta', start: 'top 82%' },
+      delay: 0.15,
+    })
+    gsap.to(imageRef.current, {
+      y: -24,
+      ease: 'none',
+      scrollTrigger: { trigger: '.ab-hero', start: 'top top', end: 'bottom top', scrub: 1.4 },
+    })
+    gsap.from('.ab-card', {
+      y: 20,
+      opacity: 0,
+      stagger: 0.08,
+      duration: 0.6,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.ab-content', start: 'top 82%' },
+    })
+    gsap.from('.ab-tech', {
+      y: 16,
+      opacity: 0,
+      stagger: 0.08,
+      duration: 0.6,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.ab-tech-wrap', start: 'top 88%' },
     })
   }, { scope: pageRef })
 
   return (
-    <main ref={pageRef} className="bg-[#080808] text-[#e8e3da] overflow-x-hidden" onMouseMove={onMouseMove}>
-
-      {/* Experience hover image follower */}
-      <div
-        ref={cursorRef}
-        style={{ left: 0, top: 0, transform: 'translate(-50%,-50%)', pointerEvents: 'none' }}
-        className={`fixed z-50 w-[240px] h-[160px] rounded-2xl overflow-hidden shadow-2xl transition-opacity duration-300 hidden md:block ${hoveredExp !== null ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <img src={aboutProfile} alt="" className="w-full h-full object-cover object-center grayscale" />
-      </div>
-
-      {/* ══ §1 HERO ══ */}
-      <section className="ab-intro relative w-full min-h-screen flex flex-col justify-between pt-36 pb-12 px-7 md:px-14 overflow-hidden">
-        {/* portrait — sits right, absolute */}
-        <div className="absolute right-0 top-0 h-full w-[42%] hidden md:block overflow-hidden">
-          <div ref={imgRef} className="h-[115%] w-full -mt-[7%]">
-            <img src={aboutProfile} alt="Suryansh" className="w-full h-full object-cover object-center grayscale opacity-60" />
+    <main ref={pageRef} className="min-h-screen overflow-hidden bg-[#080908] text-[#e8e3da]">
+      <section className="ab-hero relative overflow-hidden px-6 pb-9 pt-28 sm:px-10 lg:min-h-[620px] lg:px-[7%] lg:pb-8 lg:pt-28">
+        <div className="absolute inset-0 opacity-70 lg:left-[37%]">
+          <div ref={imageRef} className="absolute inset-0 -top-8 h-[calc(100%+4rem)]">
+            <img src={aboutHero} alt="A developer working at a desk at night" className="h-full w-full object-cover object-[62%_center]" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080908] via-[#080908]/75 to-[#080908]/10 lg:from-[#080908] lg:via-[#080908]/35 lg:to-[#080908]/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080908] via-transparent to-[#080908]/25" />
         </div>
 
-        {/* copy */}
-        <div className="relative z-10 max-w-[55%]">
-          <div className="overflow-hidden mb-2">
-            <p className="ab-meta font-[font2] text-xs tracking-[0.3em] text-[#D3FD50] uppercase">Creative Developer · 2024–26</p>
+        <div className="relative z-10 grid min-h-[490px] items-center gap-8 lg:min-h-[490px] lg:grid-cols-[0.9fr_1.2fr_100px]">
+          <div className="max-w-[570px]">
+            <p className="ab-reveal mb-3 flex items-center gap-3 text-[11px] tracking-[0.24em] text-white/70 uppercase"><span className="h-2.5 w-2.5 rounded-full bg-[#D3FD50]" />About me</p>
+            <h1 className="ab-reveal font-[font1] text-[clamp(4rem,7vw,6.6rem)] leading-[0.83] tracking-[-0.045em] text-[#f4f0e8]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              More Than<br /><span className="text-[#D3FD50]">Just</span> Code.
+            </h1>
+            <p className="ab-reveal mt-6 max-w-[470px] text-sm leading-[1.65] text-white/75 sm:text-base">
+              I’m Suryansh Yadav, a CSE (AI/ML) student at GL Bajaj Institute of Technology and Management. I enjoy building web applications, exploring AI/ML, and solving challenging problems through code.
+            </p>
+            <div className="ab-reveal mt-5 flex flex-wrap gap-3">
+              <a href="mailto:suryanshyadav117@gmail.com" className="inline-flex items-center gap-2 rounded-full bg-[#D3FD50] px-5 py-3 text-xs font-medium text-black transition-transform hover:-translate-y-0.5">✉ &nbsp; Get in Touch <span>↗</span></a>
+              <a href="/resume.pdf" download="Suryansh-Yadav-Resume.pdf" className="inline-flex items-center gap-2 rounded-full border border-white/35 px-5 py-3 text-xs text-white transition-colors hover:border-[#D3FD50] hover:text-[#D3FD50]">↓ &nbsp; Download Resume</a>
+              <Link to="/projects" className="inline-flex items-center gap-2 rounded-full border border-white/35 px-5 py-3 text-xs text-white transition-colors hover:border-[#D3FD50] hover:text-[#D3FD50]">Explore Projects <span>↗</span></Link>
+            </div>
           </div>
-          <div className="font-[font1] uppercase tracking-tighter leading-[0.84]">
-            {['ABOUT', 'ME.'].map((w) => (
-              <div key={w} className="overflow-hidden">
-                <h1 className="ab-word text-[13vw] text-[#e8e3da]">{w}</h1>
+
+          <div className="hidden lg:block" aria-hidden="true" />
+          <aside className="ab-reveal hidden max-w-[105px] self-center border-l border-[#D3FD50]/60 pl-4 lg:block">
+            <span className="font-serif text-4xl leading-none text-[#D3FD50]">“</span>
+            <p className="text-xs leading-[1.65] text-white/65">I enjoy turning ideas into real products and constantly learning new technologies.</p>
+            <span className="mt-4 block w-10 border-t border-[#D3FD50]" />
+          </aside>
+          <p className="absolute bottom-7 right-7 hidden -rotate-6 font-[font1] text-2xl italic leading-tight text-white lg:block">Build<br />Learn<br />Solve<br />Repeat<span className="mt-2 block w-16 border-t border-[#D3FD50]" /></p>
+        </div>
+
+        <div className="relative z-10 grid rounded-2xl border border-white/15 bg-black/45 px-4 backdrop-blur-sm sm:grid-cols-2 lg:grid-cols-4 lg:px-4">
+          <Stat icon="‹/›" value="300+" label="LeetCode Problems" />
+          <Stat icon="⬡" value="4+" label="Projects Built" />
+          <Stat icon="△" value="3rd Year" label="B.Tech CSE (AI/ML)" detail="GL Bajaj Institute of Technology and Management" />
+          <Stat icon="▢" value="2028" label="Expected Graduation" />
+        </div>
+      </section>
+
+      <section className="ab-content grid gap-4 px-6 pb-6 sm:px-10 lg:grid-cols-2 lg:px-[4.5%]">
+        <div className="ab-card rounded-2xl border border-white/10 bg-white/[0.018] p-5 sm:p-7">
+          <h2 className="mb-5 flex items-center gap-3 text-xs tracking-[0.2em] uppercase"><span className="h-2.5 w-2.5 rounded-full bg-[#D3FD50]" />My Journey</h2>
+          <div className="relative space-y-0 before:absolute before:bottom-5 before:left-[112px] before:top-4 before:w-px before:bg-white/30 sm:before:left-[136px]">
+            {journey.map((item, index) => (
+              <div key={item.year + item.title} className="relative grid min-h-[68px] grid-cols-[88px_1fr] gap-8 py-2 sm:grid-cols-[112px_1fr] sm:gap-12">
+                <span className="pt-1 text-right text-xs text-white/65">{item.year}</span>
+                <span className={`absolute left-[107px] top-[13px] z-10 h-3 w-3 rounded-full border-2 border-[#080908] sm:left-[131px] ${index === 0 ? 'bg-[#D3FD50]' : 'bg-[#e8e3da]'}`} />
+                <div><h3 className="text-sm font-medium text-white/90">{item.title}</h3><p className="mt-1 text-xs leading-relaxed text-white/50">{item.detail}</p></div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-24 max-w-[60%]">
-          <p className="ab-meta font-[font2] text-[#e8e3da]/50 text-base leading-relaxed max-w-sm">
-            I design and build premium interactive websites — where bold visual design meets engineering craftsmanship.
-          </p>
-          <div className="ab-meta font-[font2] text-xs text-[#3a3a3a] uppercase tracking-widest flex flex-col gap-1">
-            <span>Based in New Delhi, India</span>
-            <span>Available for freelance</span>
-            <a href="mailto:suryanshyadav117@gmail.com" className="text-[#D3FD50] mt-2 hover:underline">
-              suryanshyadav117@gmail.com
-            </a>
+        <div className="ab-card rounded-2xl border border-white/10 bg-white/[0.018] p-5 sm:p-7">
+          <h2 className="mb-5 flex items-center gap-3 text-xs tracking-[0.2em] uppercase"><span className="h-2.5 w-2.5 rounded-full bg-[#D3FD50]" />What Drives Me</h2>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {motivations.map((item) => (
+              <article key={item.title} className="flex gap-4 rounded-xl border border-white/[0.08] bg-black/20 p-4 transition-colors hover:border-[#D3FD50]/30">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-[#D3FD50]/30 bg-[#D3FD50]/[0.06] text-xl text-[#D3FD50]">{item.icon}</span>
+                <div><h3 className="text-sm font-medium text-white/90">{item.title}</h3><p className="mt-1 text-xs leading-relaxed text-white/55">{item.detail}</p></div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ══ §2 SKILLS ══ */}
-      <section className="ab-skills-wrap w-full py-24 px-7 md:px-14 border-t border-white/5">
-        <p className="font-[font2] text-xs tracking-widest text-[#D3FD50] uppercase mb-10">TECH STACK</p>
-        <div className="flex flex-wrap gap-3">
-          {skills.map((s) => (
-            <span
-              key={s}
-              className="ab-skill font-[font2] text-xs uppercase tracking-widest border border-white/10 hover:border-[#D3FD50] hover:text-[#D3FD50] rounded-full px-5 py-2.5 transition-all duration-300 cursor-default"
-            >
-              {s}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* ══ §3 EXPERIENCE ══ */}
-      <section className="ab-exp w-full py-24 px-7 md:px-14 border-t border-white/5">
-        <p className="font-[font2] text-xs tracking-widest text-[#D3FD50] uppercase mb-12">EXPERIENCE</p>
-        <div className="flex flex-col border-b border-white/5">
-          {experience.map((e, i) => (
-            <div
-              key={i}
-              onMouseEnter={() => setHoveredExp(i)}
-              onMouseLeave={() => setHoveredExp(null)}
-              className="ab-exp-row group flex flex-col md:flex-row md:items-start gap-4 md:gap-16 py-8 border-t border-white/5 hover:bg-white/[0.015] px-3 transition-colors duration-300 cursor-default"
-            >
-              <span className="font-[font2] text-xs tracking-widest text-[#3a3a3a] group-hover:text-[#D3FD50] transition-colors duration-300 shrink-0 pt-1">
-                {e.year}
-              </span>
-              <div className="flex-grow">
-                <h3 className="font-[font1] text-2xl md:text-3xl uppercase text-[#e8e3da] group-hover:text-[#D3FD50] transition-colors duration-300">
-                  {e.role}
-                </h3>
-                <p className="font-[font2] text-sm text-[#3a3a3a] mt-1">{e.company}</p>
-                <p className="font-[font2] text-sm text-[#e8e3da]/40 mt-3 max-w-lg leading-relaxed">{e.desc}</p>
+      <section className="ab-tech-wrap px-6 pb-10 sm:px-10 lg:px-[4.5%]">
+        <h2 className="mb-2 flex items-center gap-3 px-2 text-xs tracking-[0.2em] text-white/80 uppercase"><span className="h-2.5 w-2.5 rounded-full bg-[#D3FD50]" />Technologies I Work With</h2>
+        <div className="grid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.018] sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.72fr_1fr]">
+          {techGroups.map((group) => (
+            <div key={group.title} className="ab-tech border-b border-white/10 p-5 last:border-0 sm:border-r sm:last:border-0 lg:border-b-0">
+              <h3 className="mb-3 text-sm text-white/70">{group.title}</h3>
+              <div className="flex flex-wrap gap-x-4 gap-y-3">
+                {group.items.map(([name, icon, color]) => (
+                  <div key={name} className="flex items-center gap-2 text-xs text-white/75"><span className="grid h-8 w-8 place-items-center rounded-lg bg-white/[0.04] text-lg font-semibold" style={{ color }}>{icon}</span>{name}</div>
+                ))}
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ══ §4 MANIFESTO ══ */}
-      <section className="ab-manifesto w-full py-24 px-7 md:px-14 border-t border-white/5">
-        <p className="font-[font2] text-xs tracking-widest text-[#D3FD50] uppercase mb-10">DESIGN PHILOSOPHY</p>
-        {[
-          ['PRECISION OVER', '#e8e3da'],
-          ['DECORATION.', '#e8e3da'],
-          ['MOTION OVER', '#e8e3da'],
-          ['STATIC.', '#D3FD50'],
-        ].map(([text, color]) => (
-          <div key={text} className="overflow-hidden">
-            <h2 style={{ color }} className="ab-mani font-[font1] text-[7vw] uppercase leading-none tracking-tighter">
-              {text}
-            </h2>
-          </div>
-        ))}
-      </section>
-
-      {/* ══ §5 TICKER ══ */}
-      <div className="w-full overflow-hidden border-y border-white/5 py-4">
-        <div className="ab-mq flex whitespace-nowrap font-[font1] text-[3vw] uppercase text-white/5 select-none">
-          {'REACT · NEXT.JS · NODE.JS · MONGODB · FIREBASE · TAILWIND CSS · GSAP · THREE.JS · VITE · FIGMA · REACT · NEXT.JS · NODE.JS · MONGODB · FIREBASE · TAILWIND CSS · GSAP · THREE.JS · VITE · FIGMA · '}
-        </div>
-      </div>
-
-      {/* ══ §6 CTA ══ */}
-      <section className="ab-cta w-full py-28 px-7 md:px-14 border-t border-white/5 text-center flex flex-col items-center">
-        <p className="ab-cta-el font-[font2] text-xs tracking-widest text-[#D3FD50] uppercase mb-6">GET IN TOUCH</p>
-        <h2 className="ab-cta-el font-[font1] text-5xl md:text-7xl uppercase leading-none tracking-tight text-[#e8e3da] mb-10 max-w-3xl">
-          WANT TO WORK<br />TOGETHER?
-        </h2>
-        <a
-          href="mailto:suryanshyadav117@gmail.com"
-          data-cursor
-          className="ab-cta-el group relative inline-flex items-center gap-3 font-[font2] text-sm uppercase tracking-widest border border-white/20 rounded-full px-10 py-4 overflow-hidden hover:border-[#D3FD50] hover:text-black transition-all duration-500"
-        >
-          <div className="absolute inset-0 bg-[#D3FD50] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 -z-10" />
-          <span className="relative z-10">START A CONVERSATION</span>
-          <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-300">↗</span>
-        </a>
-
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-3xl text-left font-[font2] text-xs text-[#3a3a3a] uppercase tracking-widest pt-12 border-t border-white/5">
-          <div>
-            <h4 className="text-[#e8e3da] font-[font1] mb-2 text-sm">LOCATION</h4>
-            <p>New Delhi, India</p>
-            <p className="mt-1">GMT +5:30</p>
-          </div>
-          <div>
-            <h4 className="text-[#e8e3da] font-[font1] mb-2 text-sm">SERVICES</h4>
-            <p>Web Design & Dev</p>
-            <p className="mt-1">Motion & 3D</p>
-          </div>
-          <div>
-            <h4 className="text-[#e8e3da] font-[font1] mb-2 text-sm">SOCIALS</h4>
-            {['GITHUB', 'LINKEDIN', 'DRIBBBLE'].map((s) => (
-              <a key={s} href="#" className="block mt-1 hover:text-[#D3FD50] transition-colors duration-300">{s}</a>
-            ))}
-          </div>
-        </div>
-        <p className="font-[font2] text-[10px] text-[#222] mt-10 tracking-widest uppercase">
-          © {new Date().getFullYear()} Suryansh Yadav. All rights reserved.
-        </p>
-      </section>
-
+      <footer className="flex flex-col gap-3 border-t border-white/10 px-7 py-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between sm:px-[4.5%]">
+        <span className="font-[font1] text-lg text-white">Suryansh <span className="text-[#D3FD50]">Yadav.</span></span>
+        <span>© {new Date().getFullYear()} Suryansh Yadav. All rights reserved.</span>
+        <a href="mailto:suryanshyadav117@gmail.com" className="transition-colors hover:text-[#D3FD50]">Let’s connect ↗</a>
+      </footer>
     </main>
   )
 }
